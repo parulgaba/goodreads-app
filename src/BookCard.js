@@ -1,48 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './index.css';
+import "./index.css";
 
 class BookCard extends Component {
-
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      isCollapsed: true,
+      isCollapsed: true
     };
   }
 
   handleOnClick = () => {
     const { isCollapsed } = this.state;
-    this.setState({isCollapsed: !isCollapsed});
-  }
+    this.setState({ isCollapsed: !isCollapsed });
+  };
 
   render() {
     const { book } = this.props;
     const { isCollapsed } = this.state;
 
-    return(
-      <div className="row">
-        <div className="col s12 m7 card-panel grey lighten-1 btn" onClick = {this.handleOnClick}>
-          {book.title}
+    return (
+      <div className="col s4">
+        <div className="card">
+          <div className="card-image">
+            <img src={book.image_url} alt={book.title} />
+            <span className="card-title">{book.title}</span>
+          </div>
+          <div className="card-content">
+            <p>{book.description.replace(/<(?:.|\n)*?>/gm, "")}</p>
+          </div>
+          <div className="card-action">
+            <a href={book.url} target="_blank">
+              Read more
+            </a>
+          </div>
         </div>
-        {
-          !isCollapsed ?
-            <div className="col s12 m7">
-                <div className="card">
-                  <div className="card-image">
-                    <img src={book.image_url} alt="book" />
-                  </div>
-                  <div className="card-content">
-                    <p>
-                      {book.description.replace(/<(?:.|\n)*?>/gm, '')}
-                    </p>
-                  </div>
-                </div>
-            </div>
-          :
-            null
-      }
-    </div>);
+      </div>
+    );
   }
 }
 
